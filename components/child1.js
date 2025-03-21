@@ -21,7 +21,9 @@ const Child1 = ({ firstvalue }) => {
 
 
         <View>
-            <Text>Child 2</Text>
+            <Text>Child 12</Text>
+            <Text>Child 3</Text>
+            <Text>Child 4</Text>
             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{firstvalue}</Text>
             <Child2 secondvalue={firstvalue} />
         </View>
