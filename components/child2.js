@@ -22,6 +22,7 @@ const Child2 = (props) => {
 
         <View>
             <Text>{props.secondvalue}</Text>
+            <Text>this is child 2</Text>
         </View>
     );
 };
