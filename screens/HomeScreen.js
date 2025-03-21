@@ -1,138 +1,74 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  TouchableOpacity,
+  Button,
+  Image,
+  FlatList,
+  ScrollView,
+  SectionList,
+  Modal,
+  ActivityIndicator,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import Child1 from "../components/child1";
+
 
 const HomeScreen = () => {
-    const navigation = useNavigation();
+
+const [data, setData] = useState('');
+
+
+function fetchData() {
+  fetch('https://jsonplaceholder.typicode.com/posts/1')
+    .then((response) => response.json()) // Parse JSON response
+    .then((json) => {
+      setData(json); // Store the data in state
+      setLoading(false); // Set loading to false
+    })
+    .catch((error) => {
+      console.error(error); // Log any errors
+      setLoading(false); // Set loading to false
+    });
+}
+
+
   return (
-    <View style={{ marginTop: 15 }}>
-      <Image
-        style={{ height: 370, width: "100%", resizeMode: "contain" }}
-        source={{
-          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9k2hf2J5rbVVpb4Z1Gy4y9D0vWZHQnA1dW6GxHchAKtufJapZ_bJOkZ_ESB3nDoSvgFw&usqp=CAU",
-        }}
-      />
 
-      <View style={{ padding: 10 }}>
-        <Text
-          style={{
-            textAlign: "center",
-            color: "magenta",
-            fontSize: 20,
-            fontWeight: "600",
-          }}
-        >
-          QUIZ RULES
-        </Text>
-
-        <View
-          style={{
-            padding: 10,
-            backgroundColor: "#F88379",
-            borderRadius: 6,
-            marginTop: 15,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: 5,
-            }}
-          >
-            <Text style={{ color: "white" }}>•</Text>
-            <Text
-              style={{
-                marginLeft: 4,
-                color: "#722F37",
-                fontSize: 15,
-                fontWeight: "500",
-              }}
-            >
-              For each correct answer you get 5 points
-            </Text>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: 5,
-            }}
-          >
-            <Text style={{ color: "white" }}>•</Text>
-            <Text
-              style={{
-                marginLeft: 4,
-                color: "#722F37",
-                fontSize: 15,
-                fontWeight: "500",
-              }}
-            >
-              There is no negative marking for wrong answer
-            </Text>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: 5,
-            }}
-          >
-            <Text style={{ color: "white" }}>•</Text>
-            <Text
-              style={{
-                marginLeft: 4,
-                color: "#722F37",
-                fontSize: 15,
-                fontWeight: "500",
-              }}
-            >
-              Each question has a time limit of 15 sec
-            </Text>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: 5,
-            }}
-          >
-            <Text style={{ color: "white" }}>•</Text>
-            <Text
-              style={{
-                marginLeft: 4,
-                color: "#722F37",
-                fontSize: 15,
-                fontWeight: "500",
-              }}
-            >
-              You should answer all the questions compulsarily
-            </Text>
-          </View>
-        </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      
+      <View>
+        <Text>{data.title}</Text>
+        <Text>{data.body}</Text>
+        <Child1 firstvalue={data.title} />
       </View>
+      <Button title="Fetch Data" onPress={fetchData} />
+    </SafeAreaView>
 
-      <Pressable
-      onPress={() => navigation.navigate("Quiz")}
-        style={{
-          backgroundColor: "magenta",
-          padding: 14,
-          width:120,
-          borderRadius: 25,
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: 30,
-        }}
-      >
-        <Text style={{color:"white",fontWeight:"600",textAlign:"center"}}>Start Quiz</Text>
-      </Pressable>
-    </View>
+
+
   );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalView: {
+    backgroundColor: "blue",
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+  },
+});
