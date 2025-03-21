@@ -14,15 +14,15 @@ import Child2 from "./child2";
 
 
 
-const Child1 = ({firstvalue}) => {
+const Child1 = ({ firstvalue }) => {
 
 
     return (
 
 
         <View>
-            <Text>Child 1</Text>
-            <Text style={{fontSize:20, fontWeight:'bold'}}>{firstvalue}</Text>
+            <Text>Child 2</Text>
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{firstvalue}</Text>
             <Child2 secondvalue={firstvalue} />
         </View>
     );
